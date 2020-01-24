@@ -10,10 +10,21 @@ jobs:
           name: Gradle build
           command: |
             echo "Hello World!"
-
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - checkout # check out source code to working directory
+      - run:
+          name: Gradle build
+          command: |
+            echo "Hello World!"
 
 workflows:
   version: 2
   pr-check-workflow:
     jobs:
     - pr_check
+  build-deploy-workflow:
+    jobs:
+    - build
